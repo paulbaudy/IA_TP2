@@ -1,5 +1,7 @@
 #include "GameWorld.h"
 #include "Vehicle.h"
+#include "Follower.h"
+#include "Leader.h"
 #include "constants.h"
 #include "Obstacle.h"
 #include "2d/Geometry.h"
@@ -49,6 +51,7 @@ GameWorld::GameWorld(int cx, int cy):
   m_pPath = new Path(5, border, border, cx-border, cy-border, true); 
 
   //setup the agents
+  /*
   for (int a=0; a<Prm.NumAgents; ++a)
   {
 
@@ -74,15 +77,15 @@ GameWorld::GameWorld(int cx, int cy):
     //add it to the cell subdivision
     m_pCellSpace->AddEntity(pVehicle);
   }
-
-
+  
 #define SHOAL
 #ifdef SHOAL
+  
   m_Vehicles[Prm.NumAgents-1]->Steering()->FlockingOff();
   m_Vehicles[Prm.NumAgents-1]->SetScale(Vector2D(10, 10));
   m_Vehicles[Prm.NumAgents-1]->Steering()->WanderOn();
   m_Vehicles[Prm.NumAgents-1]->SetMaxSpeed(70);
-
+  
 
    for (int i=0; i<Prm.NumAgents-1; ++i)
   {
@@ -90,7 +93,40 @@ GameWorld::GameWorld(int cx, int cy):
 
   }
 #endif
+
+  */
+
+  Leader* pLeader = new Leader(this,
+	  Vector2D(cx / 2.0 + RandomClamped()*cx / 2.0,
+		cy / 2.0 + RandomClamped()*cy / 2.0),                 //initial position
+	  RandFloat()*TwoPi,        //start rotation
+	  Vector2D(0, 0));          //scale
+
+  m_Vehicles.push_back(pLeader);
+
+  //add it to the cell subdivision
+  m_pCellSpace->AddEntity(pLeader);
+
+  for (int a = 0; a<Prm.NumAgents-1; ++a)
+  {
+	  //determine a random starting position
+	  Vector2D SpawnPos = Vector2D(cx / 2.0 + RandomClamped()*cx / 2.0,
+		  cy / 2.0 + RandomClamped()*cy / 2.0);
+
+
+	  Follower* pVehicle = new Follower(this,
+		  SpawnPos,                 //initial position
+		  RandFloat()*TwoPi,        //start rotation
+		  Vector2D(0, 0),
+		  pLeader);        
+
+	  m_Vehicles.push_back(pVehicle);
+
+	  //add it to the cell subdivision
+	  m_pCellSpace->AddEntity(pVehicle);
+  }
  
+
   //create any obstacles or walls
   //CreateObstacles();
   //CreateWalls();
