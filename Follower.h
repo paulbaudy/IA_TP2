@@ -10,7 +10,7 @@ public:
 		Vector2D position,
 		double    rotation,
 		Vector2D velocity,
-		Leader* pLeader);
+		Vehicle* pVehicle);
 	~Follower();
 };
 

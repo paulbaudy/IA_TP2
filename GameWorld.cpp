@@ -118,7 +118,7 @@ GameWorld::GameWorld(int cx, int cy):
 		  SpawnPos,                 //initial position
 		  RandFloat()*TwoPi,        //start rotation
 		  Vector2D(0, 0),
-		  pLeader);        
+		  m_Vehicles.back());        
 
 	  m_Vehicles.push_back(pVehicle);
 

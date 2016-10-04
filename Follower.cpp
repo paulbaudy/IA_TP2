@@ -5,11 +5,12 @@
 
 
 
+
 Follower::Follower(GameWorld* world,
 	Vector2D position,
 	double    rotation,
 	Vector2D velocity,
-	Leader* pLeader) : Vehicle (world, 
+	Vehicle* pVehicle) : Vehicle (world,
 								position, 
 								rotation, 
 								velocity, 
@@ -19,8 +20,7 @@ Follower::Follower(GameWorld* world,
 								Prm.MaxTurnRatePerSecond, //max turn rate
 								Prm.FollowerScale)        //scale
 {
-	this->Steering()->FlockingOn();
-	this->Steering()->EvadeOn(pLeader);
+	this->Steering()->OffsetPursuitOn(pVehicle, Vector2D(0.0,1.0));
 }
 
 
