@@ -44,6 +44,7 @@ Vehicle::Vehicle(GameWorld* world,
   //set up the smoother
   m_pHeadingSmoother = new Smoother<Vector2D>(Prm.NumSamplesForSmoothing, Vector2D(0.0, 0.0)); 
   
+  followedBy = nullptr;
  
 }
 
@@ -190,4 +191,12 @@ void Vehicle::InitializeBuffer()
   {
     m_vecVehicleVB.push_back(vehicle[vtx]);
   }
+}
+
+//------------------------ Added --------------------------------------------
+void Vehicle::setFollower(Vehicle * follower)
+{
+	if (followedBy == nullptr) {
+		followedBy = follower;
+	}
 }

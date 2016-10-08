@@ -98,8 +98,18 @@ public:
   
   double       TimeElapsed()const{return m_dTimeElapsed;}
  
+
+//--------------------- Added --------------------------
+
+public:
+	Vehicle* getFollowedBy() { return followedBy; };
+	void setFollower(Vehicle* follower);
+
+private:
+	Vehicle* followedBy;
+
+
+
 };
-
-
 
 #endif

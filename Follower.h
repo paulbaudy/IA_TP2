@@ -14,10 +14,8 @@ public:
 		Vehicle* pVehicle);
 	~Follower();
 	void Update(double time_elapsed);
-	Vehicle* isFollowedBy() {return isFollowed;};
 
 private:
 	bool isFollowing;
-	Vehicle* isFollowed;
 };
 
