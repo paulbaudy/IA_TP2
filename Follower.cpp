@@ -45,8 +45,8 @@ void Follower::Update(double time_elapsed){
 				pV->setFollower(this);
 				isFollowing = pV;
 
-				this->Steering()->OffsetPursuitOn(pV, Vector2D(20.0, 20.0));
 				this->Steering()->WanderOff();
+				this->Steering()->OffsetPursuitOn(pV, Vector2D(20.0, 20.0));
 				break;
 			}
 		}

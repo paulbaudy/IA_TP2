@@ -71,6 +71,7 @@ private:
   bool  m_bShowFeelers;
   bool  m_bShowSteeringForce;
   bool  m_bShowFPS;
+  bool  m_bDrawTargetLines;
   bool  m_bRenderNeighbors;
   bool  m_bViewKeys;
   bool  m_bShowCellSpaceInfo;
@@ -135,6 +136,9 @@ public:
 
   bool  RenderFPS()const{return m_bShowFPS;}
   void  ToggleShowFPS(){m_bShowFPS = !m_bShowFPS;}
+
+  bool  RenderTargetLines()const { return m_bDrawTargetLines; }
+  void  ToggleDrawTargetLines() { m_bDrawTargetLines = !m_bDrawTargetLines; }
   
   void  ToggleRenderNeighbors(){m_bRenderNeighbors = !m_bRenderNeighbors;}
   bool  RenderNeighbors()const{return m_bRenderNeighbors;}

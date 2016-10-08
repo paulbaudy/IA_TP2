@@ -36,6 +36,7 @@ GameWorld::GameWorld(int cx, int cy):
             m_bShowSteeringForce(false),
             m_bShowFeelers(false),
             m_bShowDetectionBox(false),
+	        m_bDrawTargetLines(false),
             m_bShowFPS(true),
             m_dAvFrameTime(0),
             m_pPath(NULL),
@@ -540,6 +541,12 @@ void GameWorld::HandleMenuItems(WPARAM wParam, HWND hwnd)
 
         CheckMenuItemAppropriately(hwnd, ID_MENU_SMOOTHING, m_Vehicles[0]->isSmoothingOn());
       }
+	  case ID_SHOW_TARGETLINES:
+	  {
+		  ToggleDrawTargetLines();
+
+		  CheckMenuItemAppropriately(hwnd, ID_SHOW_TARGETLINES, RenderTargetLines());
+	  }
 
       break;
       
@@ -572,7 +579,7 @@ void GameWorld::Render()
   for (unsigned int a=0; a<m_Vehicles.size(); ++a)
   {
     m_Vehicles[a]->Render(); 
-	if(m_Vehicles[a]->getTarget()!=nullptr)
+	if(m_Vehicles[a]->getTarget()!=nullptr && m_bDrawTargetLines)
 		gdi->Line(m_Vehicles[a]->Pos(), m_Vehicles[a]->getTarget()->Pos());
     
     //render cell partitioning stuff

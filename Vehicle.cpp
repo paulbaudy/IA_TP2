@@ -197,7 +197,8 @@ void Vehicle::InitializeBuffer()
 //------------------------ Added --------------------------------------------
 void Vehicle::setFollower(Vehicle * follower)
 {
-	followedBy = follower;	
+	if(followedBy == nullptr)
+		followedBy = follower;	
 }
 
 bool Vehicle::validFollow(Vehicle * target)
