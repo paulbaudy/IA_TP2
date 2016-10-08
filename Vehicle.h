@@ -104,10 +104,15 @@ public:
 public:
 	Vehicle* getFollowedBy() { return followedBy; };
 	void setFollower(Vehicle* follower);
+	bool validFollow(Vehicle* target);
+	Vehicle * getTarget() { return isFollowing; }
+
+protected:
+	Vehicle* isFollowing;
 
 private:
 	Vehicle* followedBy;
-
+	
 
 
 };

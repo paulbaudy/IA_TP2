@@ -571,7 +571,9 @@ void GameWorld::Render()
   //render the agents
   for (unsigned int a=0; a<m_Vehicles.size(); ++a)
   {
-    m_Vehicles[a]->Render();  
+    m_Vehicles[a]->Render(); 
+	if(m_Vehicles[a]->getTarget()!=nullptr)
+		gdi->Line(m_Vehicles[a]->Pos(), m_Vehicles[a]->getTarget()->Pos());
     
     //render cell partitioning stuff
     if (m_bShowCellSpaceInfo && a==0)

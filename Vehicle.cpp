@@ -45,6 +45,7 @@ Vehicle::Vehicle(GameWorld* world,
   m_pHeadingSmoother = new Smoother<Vector2D>(Prm.NumSamplesForSmoothing, Vector2D(0.0, 0.0)); 
   
   followedBy = nullptr;
+  isFollowing = nullptr;
  
 }
 
@@ -196,7 +197,20 @@ void Vehicle::InitializeBuffer()
 //------------------------ Added --------------------------------------------
 void Vehicle::setFollower(Vehicle * follower)
 {
-	if (followedBy == nullptr) {
-		followedBy = follower;
-	}
+	followedBy = follower;	
 }
+
+bool Vehicle::validFollow(Vehicle * target)
+{
+	if (this->getFollowedBy() == nullptr)
+		return true;
+
+	if (this->getFollowedBy() == target)
+		return false;
+
+	if (target->getFollowedBy() != nullptr)
+		return false;
+
+	return this->getFollowedBy()->validFollow(target);
+}
+

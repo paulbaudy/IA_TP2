@@ -53,6 +53,10 @@ BEGIN
     BEGIN
         MENUITEM "On/Off",                      ID_MENU_SMOOTHING
     END
+	POPUP "Target Options"
+	BEGIN
+		MENUITEM "Draw target lines"			ID_SHOW_TARGETLINES
+	END
 END
 
 

@@ -26,7 +26,6 @@ Follower::Follower(GameWorld* world,
 	*/
 	this->Steering()->WanderOn();
 	this->Steering()->SeparationOn();
-	isFollowing = false;
 }
 
 Follower::~Follower()
@@ -38,14 +37,15 @@ Follower::~Follower()
 
 void Follower::Update(double time_elapsed){
 	//if the vehicle isn't following another one, search for one
-	if (!isFollowing) {
+	if (isFollowing == nullptr) {
 		World()->CellSpace()->CalculateNeighbors(this->Pos(), 50.0);
 		for (Vehicle* pV = World()->CellSpace()->begin(); !World()->CellSpace()->end(); pV = World()->CellSpace()->next())
 		{
-			if (this != pV && this != pV->Steering()->GetTarget1() && pV->getFollowedBy()==nullptr) {
-				this->Steering()->OffsetPursuitOn(pV, Vector2D(20.0, 20.0));
+			if (this != pV && this != pV->Steering()->GetTarget1() && validFollow(pV)) {
 				pV->setFollower(this);
-				isFollowing = true;
+				isFollowing = pV;
+
+				this->Steering()->OffsetPursuitOn(pV, Vector2D(20.0, 20.0));
 				this->Steering()->WanderOff();
 				break;
 			}
@@ -53,4 +53,6 @@ void Follower::Update(double time_elapsed){
 	}
 	Vehicle::Update(time_elapsed);
 }
+
+
 
