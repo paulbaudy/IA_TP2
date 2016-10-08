@@ -203,14 +203,15 @@ void Vehicle::setFollower(Vehicle * follower)
 
 bool Vehicle::validFollow(Vehicle * target)
 {
-	if (this->getFollowedBy() == nullptr)
-		return true;
 
 	if (this->getFollowedBy() == target)
 		return false;
 
 	if (target->getFollowedBy() != nullptr)
 		return false;
+
+	if (this->getFollowedBy() == nullptr)
+		return true;
 
 	return this->getFollowedBy()->validFollow(target);
 }
