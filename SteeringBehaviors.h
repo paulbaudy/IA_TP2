@@ -295,6 +295,9 @@ public:
   void      SetTargetAgent1(Vehicle* Agent){m_pTargetAgent1 = Agent;}
   void      SetTargetAgent2(Vehicle* Agent){m_pTargetAgent2 = Agent;}
 
+  //Get the first target
+  Vehicle*  GetTarget1(){return m_pTargetAgent1;}
+
   void      SetOffset(const Vector2D offset){m_vOffset = offset;}
   Vector2D  GetOffset()const{return m_vOffset;}
 

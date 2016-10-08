@@ -18,7 +18,6 @@ Leader::Leader(GameWorld* world,
 									Prm.MaxTurnRatePerSecond, //max turn rate
 									Prm.LeaderScale)         //scale
 {
-
 	this->Steering()->WanderOn();
 }
 

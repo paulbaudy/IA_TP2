@@ -100,7 +100,7 @@ GameWorld::GameWorld(int cx, int cy):
 	  Vector2D(cx / 2.0 + RandomClamped()*cx / 2.0,
 		cy / 2.0 + RandomClamped()*cy / 2.0),                 //initial position
 	  RandFloat()*TwoPi,        //start rotation
-	  Vector2D(0, 0));          //scale
+	  Vector2D(0, 0));          
 
   m_Vehicles.push_back(pLeader);
 
@@ -125,7 +125,6 @@ GameWorld::GameWorld(int cx, int cy):
 	  //add it to the cell subdivision
 	  m_pCellSpace->AddEntity(pVehicle);
   }
- 
 
   //create any obstacles or walls
   //CreateObstacles();

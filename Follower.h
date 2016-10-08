@@ -2,6 +2,7 @@
 #include "Vehicle.h"
 #include "Leader.h"
 
+
 class Follower :
 	public Vehicle
 {
@@ -12,5 +13,11 @@ public:
 		Vector2D velocity,
 		Vehicle* pVehicle);
 	~Follower();
+	void Update(double time_elapsed);
+	Vehicle* isFollowedBy() {return isFollowed;};
+
+private:
+	bool isFollowing;
+	Vehicle* isFollowed;
 };
 
