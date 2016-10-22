@@ -106,7 +106,8 @@ public:
 	void setFollower(Vehicle* follower);
 	bool validFollow(Vehicle* target);
 	Vehicle * getTarget() { return isFollowing; }
-
+	virtual void ChangeToManualResearch() {};
+	virtual void ChangeToAutoResearch() {};
 protected:
 	Vehicle* isFollowing;
 

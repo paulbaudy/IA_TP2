@@ -105,6 +105,7 @@ GameWorld::GameWorld(int cx, int cy):
 	  Vector2D(0, 0));          
 
   m_Vehicles.push_back(pLeader);
+  m_vLeaders.push_back(pLeader);
 
   //add it to the cell subdivision
   m_pCellSpace->AddEntity(pLeader);
@@ -346,6 +347,10 @@ void GameWorld::HandleKeyPresses(WPARAM wParam)
         }
         break;
 
+	default:
+		if (!m_vLeaders.empty())
+			m_vLeaders.at(0)->handleControl(wParam);
+
   }//end switch
 }
 
@@ -556,12 +561,20 @@ void GameWorld::HandleMenuItems(WPARAM wParam, HWND hwnd)
 	  case ID_AUTOMATIC_RESEARCH:
 	  {
 		  ToggleAutomaticResearch();
+		  CheckMenuItemAppropriately(hwnd, ID_AUTOMATIC_RESEARCH, AutomaticResearch());
 
-		  for (unsigned int i = 0; i < m_Vehicles.size(); i++) {
-			  // m_Vehicles[i]->
+		  if (m_bToggleAutomaticResearch) {
+			  for (unsigned int i = 0; i < m_Vehicles.size(); i++) {
+				  m_Vehicles[i]->ChangeToAutoResearch();
+			  }
+		  } else {
+			  for (unsigned int i = 0; i < m_Vehicles.size(); i++) {
+				  m_Vehicles[i]->ChangeToManualResearch();
+			  }
 		  }
 
-		  CheckMenuItemAppropriately(hwnd, ID_AUTOMATIC_RESEARCH, AutomaticResearch());
+		  
+		  
 	  }
 
 

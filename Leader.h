@@ -9,5 +9,7 @@ public:
 		double    rotation,
 		Vector2D velocity);
 	~Leader();
+
+	void handleControl(WPARAM wParam);
 };
 

@@ -18,10 +18,18 @@ Leader::Leader(GameWorld* world,
 									Prm.MaxTurnRatePerSecond, //max turn rate
 									Prm.LeaderScale)         //scale
 {
-	this->Steering()->WanderOn();
+	// this->Steering()->WanderOn();
 }
 
 
 Leader::~Leader()
 {
+}
+
+void Leader::handleControl(WPARAM wParam) {
+	switch (wParam) {
+	case 'Z':
+	case VK_UP:
+		this->Steering()->
+	}
 }

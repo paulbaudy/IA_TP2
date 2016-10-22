@@ -24,6 +24,7 @@ Follower::Follower(GameWorld* world,
 	this->Steering()->OffsetPursuitOn(pVehicle, Vector2D(0.0,1.0));
 	this->Steering()->SeparationOn();
 	*/
+	this->previous = pVehicle;
 	this->Steering()->WanderOn();
 	this->Steering()->SeparationOn();
 }
@@ -33,25 +34,43 @@ Follower::~Follower()
 	
 }
 
-
-
 void Follower::Update(double time_elapsed){
 	//if the vehicle isn't following another one, search for one
 	if (isFollowing == nullptr) {
-		World()->CellSpace()->CalculateNeighbors(this->Pos(), 100.0);
+		World()->CellSpace()->CalculateNeighbors(this->Pos(), 125.0);
 		for (Vehicle* pV = World()->CellSpace()->begin(); !World()->CellSpace()->end(); pV = World()->CellSpace()->next())
 		{
 			if (this != pV && this != pV->Steering()->GetTarget1() && validFollow(pV)) {
-				pV->setFollower(this);
-				isFollowing = pV;
-
-				this->Steering()->WanderOff();
-				this->Steering()->OffsetPursuitOn(pV, Vector2D(20.0, 20.0));
+				Follow(pV);
 				break;
 			}
 		}
 	}
 	Vehicle::Update(time_elapsed);
+}
+
+void Follower::Follow(Vehicle * toFollow)
+{
+	toFollow->setFollower(this);
+	isFollowing = toFollow;
+	this->Steering()->WanderOff();
+	this->Steering()->OffsetPursuitOn(toFollow, Vector2D(20.0, 20.0));
+}
+
+void Follower::ChangeToManualResearch()
+{
+	Follow(previous);
+}
+
+void Follower::ChangeToAutoResearch()
+{
+	//Re-init follow
+	if (isFollowing != nullptr) {
+		isFollowing->setFollower(nullptr);
+		isFollowing = nullptr;
+	}
+	this->Steering()->WanderOn();
+	this->Steering()->OffsetPursuitOff();
 }
 
 

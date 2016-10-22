@@ -14,8 +14,10 @@ public:
 		Vehicle* pVehicle);
 	~Follower();
 	void Update(double time_elapsed);
-	
+	void ChangeToManualResearch();
+	void ChangeToAutoResearch();
 private:
-	
+	Vehicle* previous; // Previous vehicle in world tab when manual research is toggled
+	void Follow(Vehicle* toFollow);
 };
 
