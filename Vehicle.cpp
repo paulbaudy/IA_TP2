@@ -203,7 +203,6 @@ void Vehicle::setFollower(Vehicle * follower)
 
 bool Vehicle::validFollow(Vehicle * target)
 {
-
 	if (this->getFollowedBy() == target)
 		return false;
 

@@ -113,8 +113,6 @@ protected:
 private:
 	Vehicle* followedBy;
 	
-
-
 };
 
 #endif

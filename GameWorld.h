@@ -72,6 +72,7 @@ private:
   bool  m_bShowSteeringForce;
   bool  m_bShowFPS;
   bool  m_bDrawTargetLines;
+  bool  m_bToggleAutomaticResearch;
   bool  m_bRenderNeighbors;
   bool  m_bViewKeys;
   bool  m_bShowCellSpaceInfo;
@@ -139,6 +140,9 @@ public:
 
   bool  RenderTargetLines()const { return m_bDrawTargetLines; }
   void  ToggleDrawTargetLines() { m_bDrawTargetLines = !m_bDrawTargetLines; }
+
+  bool  AutomaticResearch()const { return m_bToggleAutomaticResearch; }
+  void  ToggleAutomaticResearch() { m_bToggleAutomaticResearch = !m_bToggleAutomaticResearch; }
   
   void  ToggleRenderNeighbors(){m_bRenderNeighbors = !m_bRenderNeighbors;}
   bool  RenderNeighbors()const{return m_bRenderNeighbors;}

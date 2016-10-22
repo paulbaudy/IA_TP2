@@ -37,6 +37,7 @@ GameWorld::GameWorld(int cx, int cy):
             m_bShowFeelers(false),
             m_bShowDetectionBox(false),
 	        m_bDrawTargetLines(false),
+			m_bToggleAutomaticResearch(false),
             m_bShowFPS(true),
             m_dAvFrameTime(0),
             m_pPath(NULL),
@@ -541,12 +542,28 @@ void GameWorld::HandleMenuItems(WPARAM wParam, HWND hwnd)
 
         CheckMenuItemAppropriately(hwnd, ID_MENU_SMOOTHING, m_Vehicles[0]->isSmoothingOn());
       }
+
+	  break;
+
 	  case ID_SHOW_TARGETLINES:
 	  {
 		  ToggleDrawTargetLines();
 
 		  CheckMenuItemAppropriately(hwnd, ID_SHOW_TARGETLINES, RenderTargetLines());
 	  }
+	  break;
+
+	  case ID_AUTOMATIC_RESEARCH:
+	  {
+		  ToggleAutomaticResearch();
+
+		  for (unsigned int i = 0; i < m_Vehicles.size(); i++) {
+			  // m_Vehicles[i]->
+		  }
+
+		  CheckMenuItemAppropriately(hwnd, ID_AUTOMATIC_RESEARCH, AutomaticResearch());
+	  }
+
 
       break;
       
