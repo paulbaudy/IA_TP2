@@ -11,5 +11,6 @@ public:
 	~Leader();
 
 	void handleControl(WPARAM wParam);
+	Vector2D userVector;
 };
 
