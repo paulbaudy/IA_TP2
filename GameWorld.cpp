@@ -347,11 +347,14 @@ void GameWorld::HandleKeyPresses(WPARAM wParam)
         }
         break;
 
-	default:
-		if (!m_vLeaders.empty())
-			m_vLeaders.at(0)->handleControl(wParam);
-
   }//end switch
+}
+
+// -- Handle down key -- 
+void GameWorld::HandleKeyDown(WPARAM wParam)
+{
+	if (!m_vLeaders.empty())
+		m_vLeaders.at(0)->handleControl(wParam);
 }
 
 

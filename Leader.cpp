@@ -3,8 +3,6 @@
 #include "SteeringBehaviors.h"
 #include "ParamLoader.h"
 
-
-
 Leader::Leader(GameWorld* world,
 	Vector2D position,
 	double    rotation,
@@ -20,7 +18,6 @@ Leader::Leader(GameWorld* world,
 {
 	// this->Steering()->WanderOn();
 }
-
 
 Leader::~Leader()
 {
