@@ -27,7 +27,7 @@ Leader::~Leader()
 
 void Leader::Update(double time_elapsed)
 {
-	if (VectorToLocalSpace(this->Velocity(), this->Heading(), this->Side()).x < 1 && userVector.x<0) {
+	if (VectorToLocalSpace(this->Velocity(), this->Heading(), this->Side()).x < 10 && userVector.x<0) {
 		userVector.x = 0;
 	}
 

@@ -17,7 +17,7 @@
 //------------------------------------------------------------------------
 
 char* g_szApplicationName = "Steering Behaviors - Another Big Shoal";
-char*	g_szWindowClassName = "MyWindowClass";
+char* g_szWindowClassName = "MyWindowClass";
 
 GameWorld* g_GameWorld;
 
