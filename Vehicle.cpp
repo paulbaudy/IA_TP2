@@ -76,9 +76,14 @@ void Vehicle::Update(double time_elapsed)
 
   //calculate the combined force from each steering behavior in the 
   //vehicle's list
-  SteeringForce = m_pSteering->Calculate();
-
-    
+  //SteeringForce = m_pSteering->Calculate();
+  
+  //Vector2D vecTest = Vector2D(10, 10);
+  if (this->World()->Agents().at(0) == this) {
+	  Leader* lead = static_cast<Leader*>(this);
+	  SteeringForce = VectorToWorldSpace(lead->userVector, this->Heading(), this->Side());
+  }
+	 
   //Acceleration = Force/Mass
   Vector2D acceleration = SteeringForce / m_dMass;
 

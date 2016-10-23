@@ -17,6 +17,7 @@ Leader::Leader(GameWorld* world,
 									Prm.LeaderScale)         //scale
 {
 	// this->Steering()->WanderOn();
+	userVector.Zero();
 }
 
 Leader::~Leader()
@@ -24,5 +25,21 @@ Leader::~Leader()
 }
 
 void Leader::handleControl(WPARAM wParam) {
-	
+	switch(wParam) {
+	case 'Z' : 
+		userVector.x += 30;
+		break;
+	case 'S' :
+		userVector.x -= 30;
+		break;
+	case 'Q' :
+		userVector.y -= 30;
+		break;
+	case 'D' :
+		userVector.y += 30;
+		break;
+	default :
+		userVector.Zero();
+		break;
+	}
 }
