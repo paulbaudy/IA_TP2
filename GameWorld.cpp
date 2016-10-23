@@ -38,6 +38,7 @@ GameWorld::GameWorld(int cx, int cy):
             m_bShowDetectionBox(false),
 	        m_bDrawTargetLines(false),
 			m_bToggleAutomaticResearch(true),
+			m_bKeyboardControl(false),
             m_bShowFPS(true),
             m_dAvFrameTime(0),
             m_pPath(NULL),
@@ -102,13 +103,23 @@ GameWorld::GameWorld(int cx, int cy):
 	  Vector2D(cx / 2.0 + RandomClamped()*cx / 2.0,
 		cy / 2.0 + RandomClamped()*cy / 2.0),                 //initial position
 	  RandFloat()*TwoPi,        //start rotation
-	  Vector2D(0, 0));          
+	  Vector2D(0, 0));     
+
+  Leader* pLeader2 = new Leader(this,
+	  Vector2D(cx / 2.0 + RandomClamped()*cx / 2.0,
+		  cy / 2.0 + RandomClamped()*cy / 2.0),                 //initial position
+	  RandFloat()*TwoPi,        //start rotation
+	  Vector2D(0, 0));
 
   m_Vehicles.push_back(pLeader);
   m_vLeaders.push_back(pLeader);
+  m_Vehicles.push_back(pLeader2);
+  m_vLeaders.push_back(pLeader2);
+
 
   //add it to the cell subdivision
   m_pCellSpace->AddEntity(pLeader);
+  m_pCellSpace->AddEntity(pLeader2);
 
   for (int a = 0; a<Prm.NumAgents-1; ++a)
   {
@@ -578,9 +589,17 @@ void GameWorld::HandleMenuItems(WPARAM wParam, HWND hwnd)
 				  m_Vehicles[i]->ChangeToManualResearch();
 			  }
 		  }
+	  }
 
-		  
-		  
+	  break;
+
+	  case ID_KEYBOARDCONTROL: {
+
+		  ToggleKeyboardControl();
+		  CheckMenuItemAppropriately(hwnd, ID_KEYBOARDCONTROL, KeyboardControl());
+
+		  KeyboardControl()? m_vLeaders[0]->userControlOn(): m_vLeaders[0]->userControlOff();
+
 	  }
 
 

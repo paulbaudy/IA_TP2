@@ -111,6 +111,9 @@ public:
 	void handleControl(WPARAM wParam);
 	void handleControlUp(WPARAM wParam);
 
+	void userControlOn();
+	void userControlOff();
+
 	Vector2D userVector;
 protected:
 	Vehicle* isFollowing;

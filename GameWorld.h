@@ -77,6 +77,7 @@ private:
   bool  m_bShowFPS;
   bool  m_bDrawTargetLines;
   bool  m_bToggleAutomaticResearch;
+  bool  m_bKeyboardControl;
   bool  m_bRenderNeighbors;
   bool  m_bViewKeys;
   bool  m_bShowCellSpaceInfo;
@@ -148,6 +149,9 @@ public:
 
   bool  AutomaticResearch()const { return m_bToggleAutomaticResearch; }
   void  ToggleAutomaticResearch() { m_bToggleAutomaticResearch = !m_bToggleAutomaticResearch; }
+
+  bool  KeyboardControl()const { return m_bKeyboardControl; }
+  void  ToggleKeyboardControl() { m_bKeyboardControl = !m_bKeyboardControl; }
   
   void  ToggleRenderNeighbors(){m_bRenderNeighbors = !m_bRenderNeighbors;}
   bool  RenderNeighbors()const{return m_bRenderNeighbors;}

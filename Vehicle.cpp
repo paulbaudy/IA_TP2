@@ -146,6 +146,10 @@ void Vehicle::Render()
     gdi->GreenPen();
   }
 
+  if (this->Steering()->isUserControlOn()) {
+	  gdi->GreenPen();
+  }
+
   if (isSmoothingOn())
   { 
     m_vecVehicleVBTrans = WorldTransform(m_vecVehicleVB,
@@ -254,6 +258,18 @@ void Vehicle::handleControlUp(WPARAM wParam) {
  		userVector.Zero();
  		break;
  	}
+}
+
+void Vehicle::userControlOn()
+{
+	this->Steering()->WanderOff();
+	this->Steering()->UserControlOn();
+}
+
+void Vehicle::userControlOff()
+{
+	this->Steering()->WanderOn();
+	this->Steering()->UserControlOff();
 }
 
 

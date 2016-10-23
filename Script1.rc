@@ -26,12 +26,12 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
 
 IDR_MENU1 MENU
 BEGIN
-    POPUP "Objects"
+    POPUP "Obj"
     BEGIN
         MENUITEM "Walls On/Off",                ID_OB_WALLS
         MENUITEM "Obstacles On/Off",            ID_OB_OBSTACLES
     END
-    POPUP "Space Partitioning"
+    POPUP "Space Part."
     BEGIN
         MENUITEM "On/Off",                      IDR_PARTITIONING
         MENUITEM "View Neighbors",              IDM_PARTITION_VIEW_NEIGHBORS
@@ -54,8 +54,10 @@ BEGIN
     POPUP "Target Options"
     BEGIN
         MENUITEM "Draw target lines",           ID_SHOW_TARGETLINES
-        MENUITEM "Automatic research",          ID_AUTOMATIC_RESEARCH
+        MENUITEM "Automatic follower research", ID_AUTOMATIC_RESEARCH
+        MENUITEM "Keyboard control",            ID_KEYBOARDCONTROL
     END
+    MENUITEM "Graphic",                     0
 END
 
 
