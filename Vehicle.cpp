@@ -77,13 +77,6 @@ void Vehicle::Update(double time_elapsed)
   //calculate the combined force from each steering behavior in the 
   //vehicle's list
   SteeringForce = m_pSteering->Calculate();
-  
-  //This was to test -- TO REMOVE
-  //Vector2D vecTest = Vector2D(10, 10);
-  /*if (this->World()->Agents().at(0) == this) {
-	  Leader* lead = static_cast<Leader*>(this);
-	  SteeringForce = VectorToWorldSpace(lead->userVector, this->Heading(), this->Side());
-  }*/
 	 
   //Acceleration = Force/Mass
   Vector2D acceleration = SteeringForce / m_dMass;
@@ -228,19 +221,33 @@ bool Vehicle::validFollow(Vehicle * target)
 void Vehicle::handleControl(WPARAM wParam) {
 	switch (wParam) {
 	case 'Z':
-		userVector.x += 30;
-		break;
-	case 'S':
-		userVector.x -= 30;
+		userVector.x = 100;
 		break;
 	case 'Q':
-		userVector.y -= 30;
+		userVector.y = -100;
 		break;
 	case 'D':
-		userVector.y += 30;
+		userVector.y = 100;
 		break;
 	default:
 		userVector.Zero();
 		break;
 	}
 }
+
+void Vehicle::handleControlUp(WPARAM wParam) {
+	switch (wParam) {
+ 	case 'Z':
+ 		userVector.x = -100;
+ 		break;
+	case 'Q':
+ 	case 'D':
+ 		userVector.y = 0;
+		break;
+ 	default:
+ 		userVector.Zero();
+ 		break;
+ 	}
+}
+
+

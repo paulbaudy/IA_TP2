@@ -16,7 +16,7 @@ Leader::Leader(GameWorld* world,
 									Prm.MaxTurnRatePerSecond, //max turn rate
 									Prm.LeaderScale)         //scale
 {
-	// this->Steering()->WanderOn();
+	//this->Steering()->WanderOn();
 	this->Steering()->UserControlOn();
 	userVector.Zero();
 }
@@ -24,7 +24,6 @@ Leader::Leader(GameWorld* world,
 Leader::~Leader()
 {
 }
-
 
 void Leader::Update(double time_elapsed)
 {

@@ -109,6 +109,8 @@ public:
 	virtual void ChangeToManualResearch() {};
 	virtual void ChangeToAutoResearch() {};
 	void handleControl(WPARAM wParam);
+	void handleControlUp(WPARAM wParam);
+
 	Vector2D userVector;
 protected:
 	Vehicle* isFollowing;
