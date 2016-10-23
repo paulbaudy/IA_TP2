@@ -27,9 +27,5 @@ Leader::~Leader()
 }
 
 void Leader::handleControl(WPARAM wParam) {
-	switch (wParam) {
-	case 'Z':
-	case VK_UP:
-		this->Steering()->
-	}
+	
 }
