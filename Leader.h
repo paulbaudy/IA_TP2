@@ -12,5 +12,6 @@ public:
 
 	void handleControl(WPARAM wParam);
 	Vector2D userVector;
+	void Update(double time_elapsed);
 };
 

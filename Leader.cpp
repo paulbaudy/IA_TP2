@@ -46,3 +46,14 @@ void Leader::handleControl(WPARAM wParam) {
 		break;
 	}
 }
+
+void Leader::Update(double time_elapsed)
+{
+	userVector.x -= 10;
+	userVector.y -= 10;
+	if (userVector.x < 0)
+		userVector.x = 0;
+	if (userVector.y < 0)
+		userVector.y = 0;
+	Vehicle::Update(time_elapsed);
+}
