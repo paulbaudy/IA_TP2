@@ -29,6 +29,8 @@ void Leader::Update(double time_elapsed)
 {
 	if (VectorToLocalSpace(this->Velocity(), this->Heading(), this->Side()).x < 10 && userVector.x<0) {
 		userVector.x = 0;
+		userVector.y = 0;
+		this->SetVelocity(Vector2D(0, 0));
 	}
 
 	Vehicle::Update(time_elapsed);

@@ -38,13 +38,26 @@ void Follower::Update(double time_elapsed){
 	//if the vehicle isn't following another one, search for one
 	if (isFollowing == nullptr) {
 		World()->CellSpace()->CalculateNeighbors(this->Pos(), 125.0);
-		for (Vehicle* pV = World()->CellSpace()->begin(); !World()->CellSpace()->end(); pV = World()->CellSpace()->next())
+		/*for (Vehicle* pV = World()->CellSpace()->begin(); !World()->CellSpace()->end(); pV = World()->CellSpace()->next())
 		{
+			if (World()->CellSpace()->end())
+				break;
 			if (this != pV && this != pV->Steering()->GetTarget1() && validFollow(pV)) {
 				Follow(pV);
 				break;
 			}
+		}*/
+		Vehicle* pV = World()->CellSpace()->begin();
+		if (!World()->CellSpace()->end()) { //If some neighbors where found
+			do {
+				if (this != pV && this != pV->Steering()->GetTarget1() && validFollow(pV)) {
+					Follow(pV);
+					break;
+				}
+				pV = World()->CellSpace()->next();
+			} while (!World()->CellSpace()->end());
 		}
+
 	}
 	Vehicle::Update(time_elapsed);
 }

@@ -37,7 +37,7 @@ GameWorld::GameWorld(int cx, int cy):
             m_bShowFeelers(false),
             m_bShowDetectionBox(false),
 	        m_bDrawTargetLines(false),
-			m_bToggleAutomaticResearch(false),
+			m_bToggleAutomaticResearch(true),
             m_bShowFPS(true),
             m_dAvFrameTime(0),
             m_pPath(NULL),

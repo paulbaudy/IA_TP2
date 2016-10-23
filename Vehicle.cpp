@@ -221,12 +221,15 @@ bool Vehicle::validFollow(Vehicle * target)
 void Vehicle::handleControl(WPARAM wParam) {
 	switch (wParam) {
 	case 'Z':
+	case VK_UP:
 		userVector.x = 100;
 		break;
 	case 'Q':
+	case VK_LEFT:
 		userVector.y = -100;
 		break;
 	case 'D':
+	case VK_RIGHT:
 		userVector.y = 100;
 		break;
 	default:
@@ -238,10 +241,13 @@ void Vehicle::handleControl(WPARAM wParam) {
 void Vehicle::handleControlUp(WPARAM wParam) {
 	switch (wParam) {
  	case 'Z':
+	case VK_UP:
  		userVector.x = -100;
  		break;
 	case 'Q':
+	case VK_LEFT:
  	case 'D':
+	case VK_RIGHT:
  		userVector.y = 0;
 		break;
  	default:
