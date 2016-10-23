@@ -87,6 +87,11 @@ Vector2D SteeringBehavior::Calculate()
   //reset the steering force
   m_vSteeringForce.Zero();
 
+  //if the user wants to control the vehicle, it will be the only force
+  if (On(user_control)) {
+	  return UserControl();
+  }
+
   //use space partitioning to calculate the neighbours of this vehicle
   //if switched on. If not, use the standard tagging system
   if (!isSpacePartitioningOn())
@@ -685,6 +690,16 @@ Vector2D SteeringBehavior::CalculateDithered()
 
 
 /////////////////////////////////////////////////////////////////////////////// START OF BEHAVIORS
+
+//----------------------------- User Control ----------------------------
+//
+//  Returns a steering force according to the user_vector, which 
+//  represents the direction asks with the controller
+//-----------------------------------------------------------------------
+Vector2D SteeringBehavior::UserControl()
+{
+	return VectorToWorldSpace(m_pVehicle->userVector, m_pVehicle->Heading(), m_pVehicle->Side());
+}
 
 //------------------------------- Seek -----------------------------------
 //

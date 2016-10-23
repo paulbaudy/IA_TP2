@@ -19,6 +19,7 @@ Leader::Leader(GameWorld* world,
 									Prm.LeaderScale)         //scale
 {
 	// this->Steering()->WanderOn();
+	this->Steering()->UserControlOn();
 	userVector.Zero();
 }
 
@@ -27,33 +28,13 @@ Leader::~Leader()
 {
 }
 
-void Leader::handleControl(WPARAM wParam) {
-	switch(wParam) {
-	case 'Z' : 
-		userVector.x += 30;
-		break;
-	case 'S' :
-		userVector.x -= 30;
-		break;
-	case 'Q' :
-		userVector.y -= 30;
-		break;
-	case 'D' :
-		userVector.y += 30;
-		break;
-	default :
-		userVector.Zero();
-		break;
-	}
-}
-
 void Leader::Update(double time_elapsed)
 {
-	userVector.x -= 10;
-	userVector.y -= 10;
-	if (userVector.x < 0)
-		userVector.x = 0;
-	if (userVector.y < 0)
-		userVector.y = 0;
+	if (this->Steering()->isUserControlOn()) {
+		//userVector.x -= 10;
+		if (userVector.x < 0)
+			userVector.x = 0;
+	}
+
 	Vehicle::Update(time_elapsed);
 }

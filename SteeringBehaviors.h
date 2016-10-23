@@ -73,6 +73,7 @@ private:
     hide               = 0x04000,
     flock              = 0x08000,
     offset_pursuit     = 0x10000,
+	user_control	   = 0x20000, //Behavior controled by user
   };
 
 private:
@@ -183,6 +184,10 @@ private:
 
       .......................................................*/
 
+  //this behavior moves the agent according to the user controller
+  Vector2D UserControl();
+
+  /* ---------------------------- */
 
   //this behavior moves the agent towards a target position
   Vector2D Seek(Vector2D TargetPos);
@@ -312,7 +317,7 @@ public:
 
   void      SetSummingMethod(summing_method sm){m_SummingMethod = sm;}
 
-
+  void UserControlOn() { m_iFlags |= user_control; } //turn on the user control
   void FleeOn(){m_iFlags |= flee;}
   void SeekOn(){m_iFlags |= seek;}
   void ArriveOn(){m_iFlags |= arrive;}
@@ -330,6 +335,7 @@ public:
   void OffsetPursuitOn(Vehicle* v1, const Vector2D offset){m_iFlags |= offset_pursuit; m_vOffset = offset; m_pTargetAgent1 = v1;}  
   void FlockingOn(){CohesionOn(); AlignmentOn(); SeparationOn(); WanderOn();}
 
+  void UserControlOff() { if (On(user_control)) m_iFlags ^= user_control; } //turn off the user control
   void FleeOff()  {if(On(flee))   m_iFlags ^=flee;}
   void SeekOff()  {if(On(seek))   m_iFlags ^=seek;}
   void ArriveOff(){if(On(arrive)) m_iFlags ^=arrive;}
@@ -347,6 +353,7 @@ public:
   void OffsetPursuitOff(){if(On(offset_pursuit)) m_iFlags ^=offset_pursuit;}
   void FlockingOff(){CohesionOff(); AlignmentOff(); SeparationOff(); WanderOff();}
 
+  bool isUserControlOn() { return On(user_control);} //is the user control activated
   bool isFleeOn(){return On(flee);}
   bool isSeekOn(){return On(seek);}
   bool isArriveOn(){return On(arrive);}
