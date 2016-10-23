@@ -27,16 +27,13 @@ Leader::~Leader()
 void Leader::handleControl(WPARAM wParam) {
 	switch(wParam) {
 	case 'Z' : 
-		userVector.x += 30;
-		break;
-	case 'S' :
-		userVector.x -= 30;
+		userVector.x = 100;
 		break;
 	case 'Q' :
-		userVector.y -= 30;
+		userVector.y = -100;
 		break;
 	case 'D' :
-		userVector.y += 30;
+		userVector.y = 100;
 		break;
 	default :
 		userVector.Zero();
@@ -44,13 +41,28 @@ void Leader::handleControl(WPARAM wParam) {
 	}
 }
 
+void Leader::handleControlUp(WPARAM wParam) {
+	switch (wParam) {
+	case 'Z':
+		userVector.x = -100;
+		break;
+	case 'Q':
+	case 'D':
+		userVector.y = 0;
+		break;
+	default:
+		userVector.Zero();
+		break;
+	}
+}
+
+
+
 void Leader::Update(double time_elapsed)
 {
-	userVector.x -= 10;
-	userVector.y -= 10;
-	if (userVector.x < 0)
+	if (VectorToLocalSpace(this->Velocity(), this->Heading(), this->Side()).x < 1 && userVector.x<0) {
 		userVector.x = 0;
-	if (userVector.y < 0)
-		userVector.y = 0;
+	}
+
 	Vehicle::Update(time_elapsed);
 }

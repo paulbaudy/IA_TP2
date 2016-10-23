@@ -137,7 +137,7 @@ LRESULT CALLBACK WindowProc (HWND   hwnd,
 
 	case WM_KEYDOWN:
 
-		
+		g_GameWorld->HandleKeyDown(wParam);
 
 		break;
 

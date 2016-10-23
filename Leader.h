@@ -11,6 +11,7 @@ public:
 	~Leader();
 
 	void handleControl(WPARAM wParam);
+	void handleControlUp(WPARAM wParam);
 	Vector2D userVector;
 	void Update(double time_elapsed);
 };

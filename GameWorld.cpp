@@ -287,9 +287,12 @@ void GameWorld::SetCrosshair(POINTS p)
 //------------------------- HandleKeyPresses -----------------------------
 void GameWorld::HandleKeyPresses(WPARAM wParam)
 {
+	if (!m_vLeaders.empty())
+		m_vLeaders.at(0)->handleControlUp(wParam);
 
   switch(wParam)
   {
+
   case 'U':
     {
       delete m_pPath;
