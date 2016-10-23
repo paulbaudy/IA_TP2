@@ -17,46 +17,13 @@ Leader::Leader(GameWorld* world,
 									Prm.LeaderScale)         //scale
 {
 	// this->Steering()->WanderOn();
+	this->Steering()->UserControlOn();
 	userVector.Zero();
 }
 
 Leader::~Leader()
 {
 }
-
-void Leader::handleControl(WPARAM wParam) {
-	switch(wParam) {
-	case 'Z' : 
-		userVector.x = 100;
-		break;
-	case 'Q' :
-		userVector.y = -100;
-		break;
-	case 'D' :
-		userVector.y = 100;
-		break;
-	default :
-		userVector.Zero();
-		break;
-	}
-}
-
-void Leader::handleControlUp(WPARAM wParam) {
-	switch (wParam) {
-	case 'Z':
-		userVector.x = -100;
-		break;
-	case 'Q':
-	case 'D':
-		userVector.y = 0;
-		break;
-	default:
-		userVector.Zero();
-		break;
-	}
-}
-
-
 
 void Leader::Update(double time_elapsed)
 {

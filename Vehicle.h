@@ -108,6 +108,8 @@ public:
 	Vehicle * getTarget() { return isFollowing; }
 	virtual void ChangeToManualResearch() {};
 	virtual void ChangeToAutoResearch() {};
+	void handleControl(WPARAM wParam);
+	Vector2D userVector;
 protected:
 	Vehicle* isFollowing;
 
