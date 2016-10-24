@@ -133,7 +133,7 @@ void Vehicle::Render()
 
   else
   {
-    gdi->BluePen();
+    gdi->ThickBluePen();
   }
 
   if (Steering()->isInterposeOn())
@@ -146,8 +146,12 @@ void Vehicle::Render()
     gdi->GreenPen();
   }
 
-  if (this->Steering()->isUserControlOn()) {
-	  gdi->GreenPen();
+  //draw in green when it's controled by a user
+  if (this->Steering()->isUserControlOn()) { 
+	  gdi->ThickGreenPen();
+  }
+  else if (dynamic_cast<Leader*>(this)) {
+	  gdi->ThickRedPen();
   }
 
   if (isSmoothingOn())
