@@ -634,9 +634,13 @@ void GameWorld::Render()
   for (unsigned int a=0; a<m_Vehicles.size(); ++a)
   {
     m_Vehicles[a]->Render(); 
-	if(m_Vehicles[a]->getTarget()!=nullptr && m_bDrawTargetLines)
+
+	//draw lines between a vehicle and his target
+	if (m_Vehicles[a]->getTarget() != nullptr && m_bDrawTargetLines) {
+		gdi->BluePen();
 		gdi->Line(m_Vehicles[a]->Pos(), m_Vehicles[a]->getTarget()->Pos());
-    
+	}
+
     //render cell partitioning stuff
     if (m_bShowCellSpaceInfo && a==0)
     {
