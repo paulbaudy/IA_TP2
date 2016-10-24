@@ -51,14 +51,13 @@ BEGIN
     BEGIN
         MENUITEM "On/Off",                      ID_MENU_SMOOTHING
     END
-    POPUP "Target Options"
+    POPUP "Additionnal Options"
     BEGIN
         MENUITEM "Draw target lines",           ID_SHOW_TARGETLINES
         MENUITEM "Automatic follower research", ID_AUTOMATIC_RESEARCH
         MENUITEM "Keyboard control",            ID_KEYBOARDCONTROL
         MENUITEM "Add leader",                  ID_ADDLEADER
     END
-    MENUITEM "Graphic",                     ID_GRAPHIC
 END
 
 
