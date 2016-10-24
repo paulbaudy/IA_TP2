@@ -122,6 +122,9 @@ void GameWorld::initVehicles(int numLeaders) {
 		m_pCellSpace->AddEntity(pLeader);
 	}
 
+	KeyboardControl() ? m_vLeaders[0]->userControlOn() : m_vLeaders[0]->userControlOff();
+
+
 	for (int a = 0; a<Prm.NumAgents - 1; ++a)
 	{
 		//determine a random starting position
