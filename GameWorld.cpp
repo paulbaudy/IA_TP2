@@ -39,6 +39,7 @@ GameWorld::GameWorld(int cx, int cy):
 	        m_bDrawTargetLines(false),
 			m_bToggleAutomaticResearch(true),
 			m_bKeyboardControl(false),
+			m_bSecondLeader(false),
             m_bShowFPS(true),
             m_dAvFrameTime(0),
             m_pPath(NULL),
@@ -99,50 +100,46 @@ GameWorld::GameWorld(int cx, int cy):
 
   */
 
-  Leader* pLeader = new Leader(this,
-	  Vector2D(cx / 2.0 + RandomClamped()*cx / 2.0,
-		cy / 2.0 + RandomClamped()*cy / 2.0),                 //initial position
-	  RandFloat()*TwoPi,        //start rotation
-	  Vector2D(0, 0));     
-
-  Leader* pLeader2 = new Leader(this,
-	  Vector2D(cx / 2.0 + RandomClamped()*cx / 2.0,
-		  cy / 2.0 + RandomClamped()*cy / 2.0),                 //initial position
-	  RandFloat()*TwoPi,        //start rotation
-	  Vector2D(0, 0));
-
-  m_Vehicles.push_back(pLeader);
-  m_vLeaders.push_back(pLeader);
-  m_Vehicles.push_back(pLeader2);
-  m_vLeaders.push_back(pLeader2);
-
-
-  //add it to the cell subdivision
-  m_pCellSpace->AddEntity(pLeader);
-  m_pCellSpace->AddEntity(pLeader2);
-
-  for (int a = 0; a<Prm.NumAgents-1; ++a)
-  {
-	  //determine a random starting position
-	  Vector2D SpawnPos = Vector2D(cx / 2.0 + RandomClamped()*cx / 2.0,
-		  cy / 2.0 + RandomClamped()*cy / 2.0);
-
-
-	  Follower* pVehicle = new Follower(this,
-		  SpawnPos,                 //initial position
-		  RandFloat()*TwoPi,        //start rotation
-		  Vector2D(0, 0),
-		  m_Vehicles.back());        
-
-	  m_Vehicles.push_back(pVehicle);
-
-	  //add it to the cell subdivision
-	  m_pCellSpace->AddEntity(pVehicle);
-  }
+  initVehicles(1);
 
   //create any obstacles or walls
   //CreateObstacles();
   //CreateWalls();
+}
+
+void GameWorld::initVehicles(int numLeaders) {
+	for (int i = 0; i < numLeaders; i++) {
+		Leader* pLeader = new Leader(this,
+			Vector2D(m_cxClient / 2.0 + RandomClamped()*m_cxClient / 2.0,
+				m_cyClient / 2.0 + RandomClamped()*m_cyClient / 2.0),                 //initial position
+			RandFloat()*TwoPi,        //start rotation
+			Vector2D(0, 0));
+
+		m_vLeaders.push_back(pLeader);
+		m_Vehicles.push_back(pLeader);
+
+		//add it to the cell subdivision
+		m_pCellSpace->AddEntity(pLeader);
+	}
+
+	for (int a = 0; a<Prm.NumAgents - 1; ++a)
+	{
+		//determine a random starting position
+		Vector2D SpawnPos = Vector2D(m_cxClient / 2.0 + RandomClamped()*m_cxClient / 2.0,
+			m_cyClient / 2.0 + RandomClamped()*m_cyClient / 2.0);
+
+
+		Follower* pVehicle = new Follower(this,
+			SpawnPos,                 //initial position
+			RandFloat()*TwoPi,        //start rotation
+			Vector2D(0, 0),
+			m_Vehicles.back());
+
+		m_Vehicles.push_back(pVehicle);
+
+		//add it to the cell subdivision
+		m_pCellSpace->AddEntity(pVehicle);
+	}
 }
 
 
@@ -601,9 +598,22 @@ void GameWorld::HandleMenuItems(WPARAM wParam, HWND hwnd)
 		  KeyboardControl()? m_vLeaders[0]->userControlOn(): m_vLeaders[0]->userControlOff();
 
 	  }
-
-
       break;
+
+	  case ID_ADDLEADER: {
+		  ToggleSecondLeader();
+		  CheckMenuItemAppropriately(hwnd, ID_ADDLEADER, SecondLeader());
+
+		  // Clear world
+		  m_Vehicles.clear();
+		  m_vLeaders.clear();
+		  m_pCellSpace->EmptyCells();
+
+		  SecondLeader() ? initVehicles(2) : initVehicles(1);
+	  }
+	  break;
+
+	  
       
   }//end switch
 }

@@ -78,6 +78,7 @@ private:
   bool  m_bDrawTargetLines;
   bool  m_bToggleAutomaticResearch;
   bool  m_bKeyboardControl;
+  bool  m_bSecondLeader;
   bool  m_bRenderNeighbors;
   bool  m_bViewKeys;
   bool  m_bShowCellSpaceInfo;
@@ -98,6 +99,8 @@ public:
   void  Update(double time_elapsed);
 
   void  Render();
+
+  void initVehicles(int numLeader);
 
 
   void  NonPenetrationContraint(Vehicle* v){EnforceNonPenetrationConstraint(v, m_Vehicles);}
@@ -152,6 +155,9 @@ public:
 
   bool  KeyboardControl()const { return m_bKeyboardControl; }
   void  ToggleKeyboardControl() { m_bKeyboardControl = !m_bKeyboardControl; }
+
+  bool  SecondLeader()const { return m_bSecondLeader; }
+  void  ToggleSecondLeader() { m_bSecondLeader = !m_bSecondLeader; }
   
   void  ToggleRenderNeighbors(){m_bRenderNeighbors = !m_bRenderNeighbors;}
   bool  RenderNeighbors()const{return m_bRenderNeighbors;}
