@@ -73,5 +73,15 @@ void Follower::ChangeToAutoResearch()
 	this->Steering()->OffsetPursuitOff();
 }
 
+void Follower::ChangeToFlockingV(Vehicle* agent, const Vector2D offset) {
 
+	agent->setFollower(this);
+	isFollowing = agent;
 
+	this->Steering()->WanderOff();
+	this->Steering()->SeparationOff();
+
+	// this->Steering()->FlockingVOn(agent, offset);
+
+	this->Steering()->OffsetPursuitOn(agent, offset);
+}

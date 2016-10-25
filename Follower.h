@@ -16,6 +16,8 @@ public:
 	void Update(double time_elapsed);
 	void ChangeToManualResearch();
 	void ChangeToAutoResearch();
+	void ChangeToFlockingV(Vehicle* agent, const Vector2D offset);
+
 private:
 	Vehicle* previous; // Previous vehicle in world tab when manual research is toggled
 	void Follow(Vehicle* toFollow);

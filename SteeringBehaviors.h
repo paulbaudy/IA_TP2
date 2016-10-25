@@ -323,7 +323,7 @@ public:
   void      SetSummingMethod(summing_method sm){m_SummingMethod = sm;}
 
   void UserControlOn() { m_iFlags |= user_control; } //turn on the user control
-  void FlockingVOn() { m_iFlags |= flockingV; } //turn on the flocking V behavior
+  void FlockingVOn(Vehicle* v1, const Vector2D offset) { m_iFlags |= flockingV; m_vOffset = offset; m_pTargetAgent1 = v1;} //turn on the flocking V behavior
   void FleeOn(){m_iFlags |= flee;}
   void SeekOn(){m_iFlags |= seek;}
   void ArriveOn(){m_iFlags |= arrive;}

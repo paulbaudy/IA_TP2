@@ -80,7 +80,6 @@ void GameWorld::initVehicles(int numLeaders) {
 
 	KeyboardControl() ? m_vLeaders[0]->userControlOn() : m_vLeaders[0]->userControlOff();
 
-
 	for (int a = 0; a<Prm.NumAgents - 1; ++a)
 	{
 		//determine a random starting position
@@ -93,6 +92,29 @@ void GameWorld::initVehicles(int numLeaders) {
 			RandFloat()*TwoPi,        //start rotation
 			Vector2D(0, 0),
 			m_Vehicles.back());
+
+		if (FlockingV()) {
+		
+			if(a<Prm.NumAgents/2) 
+				pVehicle->ChangeToFlockingV(m_Vehicles.back(), Vector2D(-5, -15.0));
+			else if (a == Prm.NumAgents / 2) {
+				pVehicle->ChangeToFlockingV(m_Vehicles[0], Vector2D(-5, 15.0));
+			}
+			else {
+				pVehicle->ChangeToFlockingV(m_Vehicles.back(), Vector2D(-5, 15.0));
+			}	
+		}
+
+
+			/* if(a<Prm.NumAgents/2)
+				pVehicle->Steering()->OffsetPursuitOn(m_Vehicles.back(), Vector2D(-10.0, -10.0));
+			else {
+				if(a>=Prm.NumAgents/2 && a<=Prm.NumAgents/2+1)
+					
+				else
+					pVehicle->Steering()->OffsetPursuitOn(m_Vehicles.back(), Vector2D(10.0, 10.0));
+			}		*/
+		
 
 		m_Vehicles.push_back(pVehicle);
 
