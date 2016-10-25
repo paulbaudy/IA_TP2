@@ -54,7 +54,7 @@ void Follower::Follow(Vehicle * toFollow)
 	toFollow->setFollower(this);
 	isFollowing = toFollow;
 	this->Steering()->WanderOff();
-	this->Steering()->OffsetPursuitOn(toFollow, Vector2D(-20.0, -20.0));
+	this->Steering()->OffsetPursuitOn(toFollow, Vector2D(-20.0, 0.0));
 }
 
 void Follower::ChangeToManualResearch()
