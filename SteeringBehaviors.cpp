@@ -53,7 +53,7 @@ SteeringBehavior::SteeringBehavior(Vehicle* agent):
              m_dWeightEvade(Prm.EvadeWeight),
              m_dWeightFollowPath(Prm.FollowPathWeight),
              m_bCellSpaceOn(false),
-             m_SummingMethod(prioritized)
+             m_SummingMethod(weighted_average)
 
 
 {
@@ -1078,8 +1078,8 @@ Vector2D SteeringBehavior::Separation(const vector<Vehicle*> &neighbors)
     //make sure this agent isn't included in the calculations and that
     //the agent being examined is close enough. ***also make sure it doesn't
     //include the evade target ***
-    if((neighbors[a] != m_pVehicle) && neighbors[a]->IsTagged() /*&&
-      (neighbors[a] != m_pTargetAgent1)*/)
+    if((neighbors[a] != m_pVehicle) && neighbors[a]->IsTagged() &&
+      (neighbors[a] != m_pTargetAgent1))
     {
       Vector2D ToAgent = m_pVehicle->Pos() - neighbors[a]->Pos();
 

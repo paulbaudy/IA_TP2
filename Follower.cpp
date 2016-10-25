@@ -20,10 +20,6 @@ Follower::Follower(GameWorld* world,
 								Prm.MaxTurnRatePerSecond, //max turn rate
 								Prm.FollowerScale)        //scale
 {
-	/*
-	this->Steering()->OffsetPursuitOn(pVehicle, Vector2D(0.0,1.0));
-	this->Steering()->SeparationOn();
-	*/
 	this->previous = pVehicle;
 	this->Steering()->WanderOn();
 	this->Steering()->SeparationOn();
@@ -38,15 +34,6 @@ void Follower::Update(double time_elapsed){
 	//if the vehicle isn't following another one, search for one
 	if (isFollowing == nullptr) {
 		World()->CellSpace()->CalculateNeighbors(this->Pos(), 125.0);
-		/*for (Vehicle* pV = World()->CellSpace()->begin(); !World()->CellSpace()->end(); pV = World()->CellSpace()->next())
-		{
-			if (World()->CellSpace()->end())
-				break;
-			if (this != pV && this != pV->Steering()->GetTarget1() && validFollow(pV)) {
-				Follow(pV);
-				break;
-			}
-		}*/
 		Vehicle* pV = World()->CellSpace()->begin();
 		if (!World()->CellSpace()->end()) { //If some neighbors where found
 			do {
@@ -67,8 +54,7 @@ void Follower::Follow(Vehicle * toFollow)
 	toFollow->setFollower(this);
 	isFollowing = toFollow;
 	this->Steering()->WanderOff();
-	// this->Steering()->OffsetPursuitOn(toFollow, Vector2D(20.0, 20.0));
-	this->Steering()->OffsetPursuitOn(toFollow, Vector2D(-20.0, 0.0));
+	this->Steering()->OffsetPursuitOn(toFollow, Vector2D(-20.0, -20.0));
 }
 
 void Follower::ChangeToManualResearch()

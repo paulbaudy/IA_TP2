@@ -79,6 +79,7 @@ private:
   bool  m_bToggleAutomaticResearch;
   bool  m_bKeyboardControl;
   bool  m_bSecondLeader;
+  bool  m_bFlockingV;
   bool  m_bRenderNeighbors;
   bool  m_bViewKeys;
   bool  m_bShowCellSpaceInfo;
@@ -158,6 +159,9 @@ public:
 
   bool  SecondLeader()const { return m_bSecondLeader; }
   void  ToggleSecondLeader() { m_bSecondLeader = !m_bSecondLeader; }
+
+  bool  FlockingV()const { return m_bFlockingV; }
+  void  ToggleFlockingV() { m_bFlockingV = !m_bFlockingV; }
   
   void  ToggleRenderNeighbors(){m_bRenderNeighbors = !m_bRenderNeighbors;}
   bool  RenderNeighbors()const{return m_bRenderNeighbors;}
