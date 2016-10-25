@@ -745,6 +745,12 @@ Vector2D SteeringBehavior::FlockingV(const Vehicle* agent, const Vector2D offset
 
 	Vector2D force(0.0,0.0);
 	force += OffsetPursuit(agent, offset);
+
+	Vector2D distToTarget = agent->Pos() - m_pVehicle->Pos();
+
+	if (distToTarget.Length() > 100) {
+		force = Seek(agent->Pos());
+	}
 	return force;
 }
 
