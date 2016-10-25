@@ -140,6 +140,7 @@ public:
 	//these are the probabilities that a steering behavior will be used
 	//when the prioritized dither calculate method is used
 	double prWallAvoidance;
+	double prFlockingV;
 	double prObstacleAvoidance;
 	double prSeparation;
 	double prAlignment;

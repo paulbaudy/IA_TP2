@@ -203,6 +203,16 @@ bool SteeringBehavior::AccumulateForce(Vector2D &RunningTot,
 Vector2D SteeringBehavior::CalculatePrioritized()
 {       
   Vector2D force;
+
+  if (On(flockingV))
+  {
+	  assert(m_pTargetAgent1 && "pursuit target not assigned");
+	  assert(!m_vOffset.isZero() && "No offset assigned");
+
+	  force = FlockingV(m_pTargetAgent1, m_vOffset);
+
+	  if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
+  }
   
    if (On(wall_avoidance))
   {
@@ -369,6 +379,15 @@ Vector2D SteeringBehavior::CalculatePrioritized()
 //------------------------------------------------------------------------
 Vector2D SteeringBehavior::CalculateWeightedSum()
 {        
+
+	if (On(flockingV))
+	{
+		assert(m_pTargetAgent1 && "pursuit target not assigned");
+		assert(!m_vOffset.isZero() && "No offset assigned");
+
+		m_vSteeringForce += FlockingV(m_pTargetAgent1, m_vOffset) * m_dWeightFlockingV;
+	}
+
   if (On(wall_avoidance))
   {
     m_vSteeringForce += WallAvoidance(m_pVehicle->World()->Walls()) *
@@ -503,6 +522,21 @@ Vector2D SteeringBehavior::CalculateDithered()
 {  
   //reset the steering force
    m_vSteeringForce.Zero();
+
+   if (On(flockingV) && RandFloat() < Prm.prFlockingV)
+   {
+	   assert(m_pTargetAgent1 && "pursuit target not assigned");
+	   assert(!m_vOffset.isZero() && "No offset assigned");
+	   m_vSteeringForce += FlockingV(m_pTargetAgent1, m_vOffset) * m_dWeightSeek / Prm.prFlockingV;
+
+	   if (!m_vSteeringForce.isZero())
+	   {
+		   m_vSteeringForce.Truncate(m_pVehicle->MaxForce());
+
+		   return m_vSteeringForce;
+	   }
+   }
+
 
   if (On(wall_avoidance) && RandFloat() < Prm.prWallAvoidance)
   {
@@ -699,6 +733,18 @@ Vector2D SteeringBehavior::CalculateDithered()
 Vector2D SteeringBehavior::UserControl()
 {
 	return VectorToWorldSpace(m_pVehicle->userVector, m_pVehicle->Heading(), m_pVehicle->Side());
+}
+
+//----------------------------- Flocking V -------------------------------
+//
+// Returns a steering force  that keeps a vehicle at a specified offset
+// from another vehicle to make a V shape with the group
+//------------------------------------------------------------------------
+Vector2D SteeringBehavior::FlockingV(const Vehicle* agent, const Vector2D offset) {
+
+	Vector2D force;
+	force += OffsetPursuit(agent, offset);
+	return force;
 }
 
 //------------------------------- Seek -----------------------------------
