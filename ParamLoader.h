@@ -44,6 +44,7 @@ private:
 		LeaderMaxSpeed = GetNextParameterFloat();
 
 
+		FlockingVWeight = GetNextParameterFloat() * SteeringForceTweaker;
 		SeparationWeight = GetNextParameterFloat() * SteeringForceTweaker;
 		AlignmentWeight = GetNextParameterFloat() * SteeringForceTweaker;
 		CohesionWeight = GetNextParameterFloat() * SteeringForceTweaker;
@@ -65,6 +66,7 @@ private:
 		WallDetectionFeelerLength = GetNextParameterFloat();
 
 		prWallAvoidance = GetNextParameterFloat();
+		prFlockingV = GetNextParameterFloat();
 		prObstacleAvoidance = GetNextParameterFloat();
 		prSeparation = GetNextParameterFloat();
 		prAlignment = GetNextParameterFloat();
@@ -112,6 +114,7 @@ public:
 	double MaxTurnRatePerSecond;
 
 	double SeparationWeight;
+	double FlockingVWeight;
 	double AlignmentWeight;
 	double CohesionWeight;
 	double ObstacleAvoidanceWeight;

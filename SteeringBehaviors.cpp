@@ -27,6 +27,7 @@ SteeringBehavior::SteeringBehavior(Vehicle* agent):
              m_pVehicle(agent),
              m_iFlags(0),
              m_dDBoxLength(Prm.MinDetectionBoxLength),
+			 m_dWeightFlockingV(Prm.FlockingVWeight),
              m_dWeightCohesion(Prm.CohesionWeight),
              m_dWeightAlignment(Prm.AlignmentWeight),
              m_dWeightSeparation(Prm.SeparationWeight),
@@ -742,7 +743,7 @@ Vector2D SteeringBehavior::UserControl()
 //------------------------------------------------------------------------
 Vector2D SteeringBehavior::FlockingV(const Vehicle* agent, const Vector2D offset) {
 
-	Vector2D force;
+	Vector2D force(0.0,0.0);
 	force += OffsetPursuit(agent, offset);
 	return force;
 }
