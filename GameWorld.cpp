@@ -546,6 +546,11 @@ void GameWorld::HandleMenuItems(WPARAM wParam, HWND hwnd)
 		  ToggleAutomaticResearch();
 		  CheckMenuItemAppropriately(hwnd, ID_AUTOMATIC_RESEARCH, AutomaticResearch());
 
+		  if (FlockingV()) {
+			  ToggleFlockingV();
+			  CheckMenuItemAppropriately(hwnd, ID_FLOCKINGV, FlockingV());
+		  }
+
 		  if (m_bToggleAutomaticResearch) {
 			  for (unsigned int i = 0; i < m_Vehicles.size(); i++) {
 				  m_Vehicles[i]->ChangeToAutoResearch();
@@ -573,6 +578,11 @@ void GameWorld::HandleMenuItems(WPARAM wParam, HWND hwnd)
 		  ToggleSecondLeader();
 		  CheckMenuItemAppropriately(hwnd, ID_ADDLEADER, SecondLeader());
 
+		  if (FlockingV()) {
+			  ToggleFlockingV();
+			  CheckMenuItemAppropriately(hwnd, ID_FLOCKINGV, FlockingV());
+		  }
+
 		  // Clear world
 		  m_Vehicles.clear();
 		  m_vLeaders.clear();
@@ -585,6 +595,16 @@ void GameWorld::HandleMenuItems(WPARAM wParam, HWND hwnd)
 	  case ID_FLOCKINGV: {
 		  ToggleFlockingV();
 		  CheckMenuItemAppropriately(hwnd, ID_FLOCKINGV, FlockingV());
+
+		  if (SecondLeader()) {
+			  ToggleSecondLeader();
+			  CheckMenuItemAppropriately(hwnd, ID_ADDLEADER, SecondLeader());
+		  }
+
+		  if (AutomaticResearch()) {
+			  ToggleAutomaticResearch();
+			  CheckMenuItemAppropriately(hwnd, ID_AUTOMATIC_RESEARCH, AutomaticResearch());
+		  }
 
 		  // Clear world
 		  m_Vehicles.clear();
