@@ -17,7 +17,7 @@ Il existe deux types de recherche pour un agent poursuiveur:
 tant qu'il n'en trouve pas, il est en wander. L'option "Automatic Follower Research",
 présente dans l'onglet "Additionnal Options" permet de l'activer. Dans cet onglet, il
 est aussi possible de tracer les segments permettant de visualiser la cible de chaque 
-agent, lorsqu'il en a une.
+agent, lorsqu'il en a une, avec l'option "Draw target lines".
 
 --> Question 3
 Lorsque les agents-poursuiveurs suivent simplement l'agent avant eux dans le tableau 
@@ -41,3 +41,8 @@ Nous avons ajouté les différents choix de paramètres de contrôle de jeu dans l'o
 "Additionnal Options", déjà mentionné dans les questions précédentes. Les véhicules sont 
 dessinés en gras pour une meilleure visibilité ici. Un agent-poursuiveur est en bleu, un 
 leader en Wander est en rouge, mais en vert s'il est contrôlé au clavier.
+
+--> Question 6
+Nous avons implanté une formation "Flocking V" à l'aide de l'algorithme d'Offset Poursuit ainsi
+que de celui du Seek selon la distance entre les agents. Pour mettre en place cette formation,
+il faut activer l'option "Flocking V" dans l'onglet "Additionnal Options".
