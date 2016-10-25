@@ -74,7 +74,7 @@ private:
     flock              = 0x08000,
     offset_pursuit     = 0x10000,
 	user_control	   = 0x20000, //Behavior controled by user
-	flockingV		   = 0x24000, //Behavior Flocking V
+	flockingV		   = 0x40000, //Behavior Flocking V
   };
 
 private:

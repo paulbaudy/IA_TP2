@@ -93,13 +93,6 @@ Vector2D SteeringBehavior::Calculate()
 	  return UserControl();
   }
 
-  if (On(flockingV)) {
-	  assert(m_pTargetAgent1 && "pursuit target not assigned");
-	  assert(!m_vOffset.isZero() && "No offset assigned");
-
-	  return FlockingV(m_pTargetAgent1, m_vOffset);
-  }
-
   //use space partitioning to calculate the neighbours of this vehicle
   //if switched on. If not, use the standard tagging system
   if (!isSpacePartitioningOn())

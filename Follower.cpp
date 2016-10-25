@@ -83,5 +83,5 @@ void Follower::ChangeToFlockingV(Vehicle* agent, const Vector2D offset) {
 
 	// this->Steering()->FlockingVOn(agent, offset);
 
-	this->Steering()->OffsetPursuitOn(agent, offset);
+	this->Steering()->FlockingVOn(agent, offset);
 }
