@@ -74,6 +74,7 @@ private:
     flock              = 0x08000,
     offset_pursuit     = 0x10000,
 	user_control	   = 0x20000, //Behavior controled by user
+	flockingV		   = 0x24000, //Behavior Flocking V
   };
 
 private:
@@ -118,6 +119,7 @@ private:
   //multipliers. These can be adjusted to effect strength of the  
   //appropriate behavior. Useful to get flocking the way you require
   //for example.
+  double        m_dWeightFlockingV; //to adjust the strength of Flocking V
   double        m_dWeightSeparation;
   double        m_dWeightCohesion;
   double        m_dWeightAlignment;
@@ -133,6 +135,7 @@ private:
   double        m_dWeightHide;
   double        m_dWeightEvade;
   double        m_dWeightFollowPath;
+
 
   //how far the agent can 'see'
   double        m_dViewDistance;
@@ -187,6 +190,8 @@ private:
   //this behavior moves the agent according to the user controller
   Vector2D UserControl();
 
+  //this behavior moves a group like birds with a flocking in V
+  Vector2D FlockingV(const Vehicle* agent, const Vector2D offset);
   /* ---------------------------- */
 
   //this behavior moves the agent towards a target position
@@ -318,6 +323,7 @@ public:
   void      SetSummingMethod(summing_method sm){m_SummingMethod = sm;}
 
   void UserControlOn() { m_iFlags |= user_control; } //turn on the user control
+  void FlockingVOn() { m_iFlags |= flockingV; } //turn on the flocking V behavior
   void FleeOn(){m_iFlags |= flee;}
   void SeekOn(){m_iFlags |= seek;}
   void ArriveOn(){m_iFlags |= arrive;}
@@ -336,6 +342,7 @@ public:
   void FlockingOn(){CohesionOn(); AlignmentOn(); SeparationOn(); WanderOn();}
 
   void UserControlOff() { if (On(user_control)) m_iFlags ^= user_control; } //turn off the user control
+  void FlockingVOff() { if (On(flockingV)) m_iFlags ^= flockingV; } //turn off the flocking V behavior
   void FleeOff()  {if(On(flee))   m_iFlags ^=flee;}
   void SeekOff()  {if(On(seek))   m_iFlags ^=seek;}
   void ArriveOff(){if(On(arrive)) m_iFlags ^=arrive;}
@@ -354,6 +361,7 @@ public:
   void FlockingOff(){CohesionOff(); AlignmentOff(); SeparationOff(); WanderOff();}
 
   bool isUserControlOn() { return On(user_control);} //is the user control activated
+  bool isFlockingVOn() { return On(flockingV);} //is the flocking V behavior activated
   bool isFleeOn(){return On(flee);}
   bool isSeekOn(){return On(seek);}
   bool isArriveOn(){return On(arrive);}
